@@ -22,10 +22,12 @@ pub mod amm {
     }
     pub fn change_admin(ctx: Context<ChangeAdmin>) -> Result<()> {
         ctx.accounts.change_admin()?;
+        
         Ok(())
     }
     pub fn claim_fee(ctx: Context<ClaimFee>) -> Result<()> {
         ctx.accounts.claim_fee()?;
+
         Ok(())
     }
     pub fn initialize_amm(ctx: Context<InitalizeAmm>, metadata: InitTokenParams) -> Result<()> {
@@ -33,16 +35,19 @@ pub mod amm {
         ctx.accounts.init_amm_state(&metadata, &ctx.bumps)?;
         ctx.accounts.mint_to_reserve(&metadata, &ctx.bumps)?;
         msg!("Initalized amm successfully");
+        
         Ok(())
     }
     pub fn buy_coin(ctx: Context<BuyCoin>, amount: u64) -> Result<()> {
         ctx.accounts.buy_coin(amount)?;
         msg!("Bought coin successfully");
+        
         Ok(())
     }
     pub fn sell_coin(ctx: Context<SellCoin>, token_amount: u64) -> Result<()> {
         ctx.accounts.sell_coin(token_amount)?;
         msg!("Sold coin successfully");
+        
         Ok(())
     }
 }
