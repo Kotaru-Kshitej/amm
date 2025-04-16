@@ -47,8 +47,6 @@ describe("amm", () => {
     TOKEN_METADATA_PROGRAM_ID
   );
   it("fund all the wallets", async () => {
-    // let tx = await provider.connection.requestAirdrop(payer.publicKey, web3.LAMPORTS_PER_SOL * 100)
-    // await provider.connection.confirmTransaction(tx)
     console.log("mint: ", mint.toBase58())
     console.log("amm: ", ammPubkey.toBase58())
 
@@ -132,8 +130,6 @@ describe("amm", () => {
   it("can sell memecoin", async () => {
     const ammData = await program.account.amm.fetch(ammPubkey)
 
-    // const tokenAccount = await getAssociatedTokenAddressSync(mint, provider.wallet.publicKey, false, TOKEN_PROGRAM_ID)
-    // const balace = (await provider.connection.getTokenAccountBalance(tokenAccount)).value.amount
     const tx = await program.methods.sellCoin(new anchor.BN(100))
       .accountsPartial({
         signer: provider.wallet.publicKey,
@@ -142,7 +138,7 @@ describe("amm", () => {
         creator: ammData.creator,
         amm: ammPubkey
       })
-      // .signers([payer])
+      
       .rpc()
     console.log(tx)
   })
